@@ -13,9 +13,14 @@
   </thead>
 </table>
 
+ 
   <div class="row">
-    <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block " do %>
-    <i class="fas fa-user-edit"></i>
+    <% if user == current_user %>
+     <td><%= render "relationships/btn", user: user %></td>
+    <% else %>
+      <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block " do %>
+        <i class="fas fa-user-edit"></i>
+      <% end %>
     <% end %>
   </div>
   
