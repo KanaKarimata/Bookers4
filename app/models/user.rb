@@ -25,8 +25,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   
   # group作成のアソシエーション
-  has_many :group_users
-  has_many :groups, through: :group_users
+  has_many :group_users, dependent: :destroy
   
   def get_profile_image(width,height)
     unless profile_image.attached?
