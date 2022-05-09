@@ -13,16 +13,18 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
-  end 
+  end
 
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create]
   end
-  
+
   get '/search', to: 'searches#search'
-  
-  resources :groups, except: [:destroy]
-  
+
+  resources :groups do
+    get 'join' => 'groups#join', as: 'join'
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
