@@ -21,7 +21,12 @@ class User < ApplicationRecord
   # 自分をフォローしている人
   has_many :followers, through: :reverse_of_relationships, source: :follower
   
+  has_many :profile_images, dependent: :destroy
   has_one_attached :profile_image
+  
+  # group作成のアソシエーション
+  has_many :group_users
+  has_many :groups, through: :group_users
   
   def get_profile_image(width,height)
     unless profile_image.attached?
