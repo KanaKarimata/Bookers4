@@ -8,7 +8,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    # @books = Book.all
+    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.length <=> a.favorited_users.length}
     @book_new = Book.new
     @user = current_user
   end
