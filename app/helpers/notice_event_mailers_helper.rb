@@ -1,0 +1,2 @@
+module NoticeEventMailersHelper
+end

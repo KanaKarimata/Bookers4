@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
   end
-  
+
   def index
     @book = Book.new
     @user = current_user
@@ -18,17 +18,9 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  # def join
-  #   @group = Group.find(params[:group_id])
-  #   @group.users << current_user
-  #   redirect_to groups_path
-  # end
-
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
-    # group作者がメンバー数にカウントされるように
-    # @group.user << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -48,12 +40,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @group = Group.find(params[:id])
-  #   # current_userは@group.userから消されるという記述。
-  #   @group.users.delete(current_user)
-  #   redirect_to groups_path
-  # end
 
   private
 

@@ -1,0 +1,3 @@
+class NoticeEventsMailer < ApplicationMailer
+  
+end
