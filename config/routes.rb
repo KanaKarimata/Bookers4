@@ -24,7 +24,8 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:new, :index, :show, :create, :edit, :update] do
     resource :group_users, only: [:create, :destroy]
-    resource :notice_events_mailer, only: [:new_mail, :send_mail]
+    resources :notice_events_mailers, only: [:new, :create]
+    get "notice_events_mailers" => "notice_events_mailers#sent"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
