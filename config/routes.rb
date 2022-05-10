@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     resources :notice_events_mailers, only: [:new, :create]
     get "notice_events_mailers" => "notice_events_mailers#sent"
   end
+  
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

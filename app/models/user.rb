@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_books, through: :favorites, source: :book
   has_many :book_comments, dependent: :destroy
+  has_many :profile_images, dependent: :destroy
+  has_one_attached :profile_image
 
   # フォローをした、されたの関係
   # 自分がフォローする側の関係性
@@ -15,18 +17,18 @@ class User < ApplicationRecord
   # 自分がフォローされる関係性
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
-
   # 一覧画面で使う
   # 自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
   # 自分をフォローしている人
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  has_many :profile_images, dependent: :destroy
-  has_one_attached :profile_image
-
   # group作成のアソシエーション
   has_many :group_users, dependent: :destroy
+  
+  # DM機能のアソシエーション
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   def get_profile_image(width,height)
     unless profile_image.attached?
