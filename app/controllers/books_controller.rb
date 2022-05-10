@@ -9,7 +9,12 @@ class BooksController < ApplicationController
 
   def index
     # @books = Book.all
-    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.length <=> a.favorited_users.length}
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.all.sort {|a,b| 
+    b.favorited_users.length <=> 
+    a.favorited_users.length
+    }
     @book_new = Book.new
     @user = current_user
   end

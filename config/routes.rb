@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/show'
   get 'relationships/followings'
   get 'relationships/followers'
   get 'books/new'
